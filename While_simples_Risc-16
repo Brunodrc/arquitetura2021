@@ -1,0 +1,22 @@
+lw 1,0,a
+lw 2,0,b
+lw 3,0,c
+nand 3, 0,c #gambiarra para realiar subtração, transforma o valor de c em negativo
+addi 3, 1,c
+add 4,1,2
+add 5,3,4     #gambiarra para realiar subtração
+lui 6, 511    #gambiarra eliminar os 4 bits iniciais
+addi 6,6,63   #gambiarra paraconseguir comparar numero menor ou maior que zero
+teste:	nand 7,5,6
+beq 7,6,fim
+addi 1,1,1  #saida do while
+addi 2,2,2
+addi 3,3,-1
+beq 0,0,teste
+fim:    sw 1, a,0
+sw 2, b, 0
+sw 3, c, 0
+halt
+a: .fill 10
+b: .fill 12
+c: .fill 30
