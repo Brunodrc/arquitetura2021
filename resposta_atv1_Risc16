@@ -3,9 +3,9 @@ lw 2,0,b
 lw 3,0,c
 
 lw 6,0,testenegativo
-lui 5,512 # testar se A+B+C<0
+lui 5,512 # coloca o 32767 em negativo
 
-teste_enquanto: add 4,0,0
+teste_enquanto: add 4,0,0 #zera o registrador para realizar o teste 
 
 add 4,1,2 #calcula a+b
 
@@ -31,5 +31,5 @@ beq 0,0,teste_enquanto
 
 a: .fill 10
 b: .fill 12
-c: ;fill 30
+c: .fill 30
 testenegativo: .fill 32767
