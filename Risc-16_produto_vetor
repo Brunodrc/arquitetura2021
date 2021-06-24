@@ -1,0 +1,50 @@
+addi 3,0,1  # inicializa PRODUTO com"1"
+
+lw 2,0,t  #carrega o tamanho t do vetor
+
+lw 5,0,TESTANEGATIVO #32767 = 0111111111111111
+
+lui 6,512 #para isolar o bit mais significativo em (t-i)
+
+TESTE_PARA:  lw 1,0,i #carrega o índice i
+
+# faz o complemento de 2 para i, ou i=-i / NOT(i)+1
+
+add 7,0,1 #-i é calculado no registrador 7
+
+nand 7,7,7 # faz i = NOT(i)
+
+addi 7,7,1 # faz i = i+1
+
+add 4,2,7 #calcula (t-i)
+
+nand 4,4,6 # verifica se o bit mais significativo de (t-i) é "1"
+beq 4,5,FIM_PARA # se o conteúdo de 4 for "01111111111111111 (32767), então t-i<0"
+
+INICIO_PARA: lw 1,0,i # carrega o índice i
+
+lw 7,1,V #carrega a conteúdo do vetor V[i] em 7
+
+#mul 3,3,7 #PRODUTO = PRODUTO * V[i] criar um for para realizar a multiplicaçao de um numero
+
+addi 1,1,1 # incremento de i
+
+sw 1,0,i #salva i na memória
+
+beq 0,0,TESTE_PARA # volta ao início do teste do PARA
+
+FIM_PARA:      sw 3,0,PRODUTO # armazena SOMA na memória
+halt
+
+i: .fill 1
+t: .fill 5
+PRODUTO: .fill 1
+TESTANEGATIVO:        .fill 32767
+
+V: .fill 24
+#posição base do vetor V na memória
+.fill 2
+.fill 3
+.fill 1
+.fill 5
+.fill 2
