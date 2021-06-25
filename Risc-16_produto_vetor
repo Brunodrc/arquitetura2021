@@ -23,9 +23,20 @@ beq 4,5,FIM_PARA # se o conteúdo de 4 for "01111111111111111 (32767), então t-
 
 INICIO_PARA: lw 1,0,i # carrega o índice i
 
-lw 7,1,V #carrega a conteúdo do vetor V[i] em 7
+lw 4,1,V #carrega a conteúdo do vetor V[i] em 4
 
-#mul 3,3,7 #PRODUTO = PRODUTO * V[i] criar um for para realizar a multiplicaçao de um numero
+nand 4,4,4 #r7 = -3
+addi 4,4,2 #r7= -1
+lw 7,1,V
+Add 4,4,7 #r4=2+-1 
+nand 4,4,6  # verifica se o resultado da subtração é negativo
+beq 4,5,fim_produto
+inicio_produto: lw 1,0,i
+lw 7,1,V
+Add 4,7,7
+Addi 4,0,1
+beq 0,0, INICIO_PARA
+fim_produto: addi 1,1,1 # incremento de i
 
 addi 1,1,1 # incremento de i
 
@@ -33,7 +44,7 @@ sw 1,0,i #salva i na memória
 
 beq 0,0,TESTE_PARA # volta ao início do teste do PARA
 
-FIM_PARA:      sw 3,0,PRODUTO # armazena SOMA na memória
+FIM_PARA:      sw 3,0,PRODUTO # armazena o produto na memória
 halt
 
 i: .fill 1
