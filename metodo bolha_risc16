@@ -1,0 +1,40 @@
+lw 1,0,vetor
+ite_vetor: sw 1,0,aux
+ite_troca: lw 2,0,indice
+beq 1,2,fim_troca
+lw 4,2,vetor
+addi 3,2,1
+sw 3,0,indice
+lw 5,3,vetor
+nand 6,5,5
+addi 6,6,1
+add 7,4,6
+lw 6,0,teste_neg
+nand 7,6,7
+lw 6,0,neg
+beq 6,7,troca 
+volta: beq 0,0,ite_troca
+fim_troca: halt
+addi 1,1,-1
+sw 1,0,aux
+addi 4,0,1
+beq 1,4,fim_ite
+addi 2,0,1
+sw 2,0,indice
+beq 0,0,ite_troca
+fim_ite: lw 1,0,vetor
+addi 7,0,1
+troca: sw 4,3,vetor
+addi 3,3,-1
+sw 5,3,vetor
+beq 0,0,volta
+teste_neg: .fill -32768
+neg: .fill -1
+aux: .fill 
+indice: .fill 1
+vetor: .fill 5
+.fill 4
+.fill 1
+.fill 8
+.fill 5
+.fill 3
